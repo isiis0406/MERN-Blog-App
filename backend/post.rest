@@ -1,0 +1,31 @@
+GET http://localhost:3001/posts/
+
+###
+GET http://localhost:3001/posts/63f0df7a76da71536d1a7390
+
+###
+POST http://localhost:3001/posts/
+Content-Type: application/json
+
+{
+    "title": "my third post",
+    "abstract": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate odit officia voluptatibus aspernatur cum porro ea sed laudantium aliquid nam!",
+    "author": "BALDE Issa Bobo",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum ab placeat id. Assumenda deleniti delectus a, et deserunt labore ipsum soluta beatae eos, ullam fuga voluptas libero dolorem eveniet. Voluptas quos repellat quia repudiandae hic, sed consequatur debitis sapiente esse voluptate quam qui ipsa harum dicta corporis totam, quis voluptatem"
+
+}
+
+###
+PATCH http://localhost:3001/posts/63f0d97545b6b8f6704f1991
+Content-Type: application/json
+
+{
+    "title": "my second updated post",
+    "abstract": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate odit officia voluptatibus aspernatur cum porro ea sed laudantium aliquid nam!",
+    "author": "SOW Marouane",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum ab placeat id. Assumenda deleniti delectus a, et deserunt labore ipsum soluta beatae eos, ullam fuga voluptas libero dolorem eveniet. Voluptas quos repellat quia repudiandae hic, sed consequatur debitis sapiente esse voluptate quam qui ipsa harum dicta corporis totam, quis voluptatem"
+
+}
+
+###
+DELETE http://localhost:3001/posts/63f0d97545b6b8f6704f1991
