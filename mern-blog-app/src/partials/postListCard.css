@@ -1,0 +1,30 @@
+.postListCard {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    padding: 1rem 3rem;
+    max-width: 100%;
+}
+.text{
+    padding: 0 1rem;
+}
+.text h3{
+    margin-top: 1rem;
+    font-size: 1.4em;
+    padding-bottom: 0.4em;
+}
+.text p{
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    color: #888;
+    text-align: justify;
+}
+
+@media (max-width: 950px ) {
+    .postListCard{
+        display: flex;
+        flex-direction: column;
+    }
+    .text h3{
+        font-size: 1.4em;
+    }
+}

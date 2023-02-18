@@ -1,0 +1,46 @@
+
+.summary{
+    display: flex;
+    align-items: center;
+    
+    padding: 1rem 3rem;
+    max-width: 100%;
+    
+}
+.summary img{
+    max-width: 100%;
+    width: 40vw;
+    margin-right: 2rem;
+}
+.abstract{
+    flex: 50;
+}
+.abstract h4{
+    text-align: center;
+    font-weight: bold;
+}
+.abstract p{
+    text-align: justify;
+    color: #6c6c6c;
+    padding: 3rem;
+}
+.content{
+    margin-top: 2rem;
+    text-align: justify;
+    color: #6c6c6c;
+}
+button{
+    display: inline;
+    float: right;
+    border: none;
+    background-color: #6c6c6c;
+    color: white;
+    padding: 0.8rem 1rem ;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.danger{
+    margin: 0 1rem;
+    background-color: rgb(163, 0, 0);
+}

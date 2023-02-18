@@ -1,0 +1,41 @@
+@import url('./navbar.css');
+@import url('./postListCard.css');
+@import url('./formPost.css');
+@import url('./singlePost.css');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    max-width: 80%;
+    margin: auto;
+}
+h2{
+    font-size: 2rem;
+    text-align: center;
+    margin: 3rem 0;
+}
+h3{
+    font-size: 1.6rem;
+    text-align: center;
+
+}
+h4{
+    font-size: 1.2rem;
+}
+img{
+    max-width: 100%;
+}
+p{
+    font-size: 1rem;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+
+
