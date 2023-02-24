@@ -6,9 +6,8 @@ const postSchema = new mongoose.Schema({
     abstract:{type: String, required: true},
     author:{type: String},
     content:{type: String, required: true},
-    publicationDate: {type: Date, default: Date.now() },
-    created_at : {type: Date, default: Date.now() },
+    cover:{type: String, required: false}
     
-})
+},{timestamps: true})
 module.exports = mongoose.model('Post', postSchema);
  

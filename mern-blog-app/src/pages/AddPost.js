@@ -2,66 +2,122 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 import('../partials/formPost.css');
 
 
 function AddPost() {
-    const [post, setPost] = useState({
-        title: "",
-        abstract: "",
-        author: "",
-        content: ""
-    });
+    const [title, setTitle] = useState("")
+    const [abstract, setAbstract] = useState("")
+    const [author, setAuthor] = useState("")
+    const [content, setContent] = useState("")
+    const [file, setFile] = useState(null)
+
     const navigate = useNavigate();
-    //Add values of input to the post state
-    const handleChange = (e) =>{
-        const {name, value} = e.target;
-        setPost({...post, [name]:value});
-    }
+
+    //Modules for react-quill text area
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+            ['link', 'image'],
+            ['clean']
+        ],
+    };
+
+    //Formats for react-quill text area
+    const formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image'
+    ];
+
 
     //Manage the data submeted by user
-    const handleSubmit =  async (e) =>{
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
-        const {title,abstract,author,content} = post 
+        const newpost = {title, abstract, author, content};
+        if(file){
+            const data = new FormData();
+            const filename = Date.now().toString() + file.name;
+            data.append('name', filename);
+            data.append('file', file);
+            newpost.cover = filename;
+            try {
+                await axios.post('http://localhost:3001/upload', data);
+    
+            } catch (error) {
+            }
+        }
         try {
-             await axios.post('http://localhost:3001/posts',{
-                title,abstract,author,content
-            })
+            await axios.post('http://localhost:3001/posts', newpost)
             //Alert the Ok response
             swal({
                 title: "Success!",
                 text: "Your post created successfully",
                 icon: "success",
                 button: "Ok",
-              });
-              
+            });
+
             //Redirect to home Page
             navigate('/');
-       }
+        }
         catch (error) {
-       
-        swal({
-            title: "Issued!",
-            text: `Please try again`,
-            icon: "error",
-            button: "Ok",
-          });
-       }
+
+            swal({
+                title: "Issued!",
+                text: `Please try again`,
+                icon: "error",
+                button: "Ok",
+            });
+        }
     }
 
 
     return (
         <div className='addPost'>
             <h3>Add post</h3>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name='title' placeholder='Title'  value={post.title}  onChange={(e) => handleChange(e)}/>
-                <input type="text" name='abstract' placeholder='Abstract' value={post.abstract}  onChange={(e) => handleChange(e)} />
-                <input type="text" name='author'placeholder='Author' value={post.author}  onChange={(e) => handleChange(e)} />
-                <textarea id='content' name='content' cols="30" rows="10" onChange={(e) => handleChange(e)} value={post.content} placeholder="Content"></textarea>
+            <form id='form' onSubmit={handleSubmit} encType="multipart/form-data">
+                <input 
+                type="text" 
+                name='title' 
+                placeholder='Title' 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} />
+                
+                <input 
+                type="text" 
+                name='abstract' 
+                placeholder='Abstract' 
+                value={abstract} 
+                onChange={(e) => setAbstract(e.target.value)} />
+    
+                <input 
+                type="text" 
+                name='author' 
+                placeholder='Author' 
+                value={author} 
+                onChange={(e) => setAuthor(e.target.value)} />
+
+                <input 
+                type="file" 
+                name='cover' 
+                onChange={(e) => setFile(e.target.files[0])} />
+                <ReactQuill
+                    placeholder='Content'
+                    value={content}
+                    onChange={(newValue) => setContent(newValue)}
+                    modules={modules}
+                    formats={formats}
+                />
                 <span></span>
                 <button type="submit">Add Post</button>
-            
+
             </form>
         </div>
     )

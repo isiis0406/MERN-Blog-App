@@ -1,9 +1,11 @@
 const Post = require('../models/Post');
+const fileUpload = require("express-fileupload");
+
 
 //Get all Post
 module.exports.getAllPost = async (req, res) => {
     try {
-        const posts = await Post.find().sort({publicationDate: -1});
+        const posts = await Post.find().sort({createdAt: -1});
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -26,20 +28,32 @@ module.exports.getOnePost = async (req, res) => {
 //Add On post
 module.exports.addOnePost = async (req, res) => {
     try {
-        const {title, abstract, author, content,publicationDate} = req.body;
-        const newPost = await Post.create({title, abstract, author, content,publicationDate});
+    
+            //Manage String data 
+            const dataPost = 
+            {   title: req.body.title, 
+                abstract: req.body.abstract, 
+                author: req.body.author,
+                content: req.body.content,
+                cover: req.body.cover
+                } 
+        //Store infos & cover path to the database
+        const newPost = await Post.create(dataPost);
         res.status(201).json({post: newPost, message: 'Post created successfully'});
     } catch (error) {
         res.status(500).json({message: error.message});
     }
 }
 
+
+
 // Update One post
 module.exports.updateOnepost = async (req, res) => {
     try {
-        const {title, abstract, author, content,publicationDate} = req.body;
+        const {title, abstract, author, content,cover} = req.body;
         const updatedPost = await Post.updateOne({_id: req.params.id}, {
-            $set: {title, abstract, author, content,publicationDate}
+            $set: {title, abstract, author, content,cover
+            }
         });
         if (JSON.parse(updatedPost.modifiedCount) == false) {
             return res.status(404).json({ message: "Post not founded" });

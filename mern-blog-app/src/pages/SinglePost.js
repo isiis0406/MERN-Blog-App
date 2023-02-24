@@ -9,7 +9,7 @@ function SinglePost() {
     const [post, setPost] = useState({});
     const params = useParams();
     const navigate = useNavigate();
-
+    const PF  = "http://localhost:3001/"
     // Get the datas of post from the server
     useEffect(() => {
         getPost();
@@ -67,13 +67,13 @@ function SinglePost() {
 
             <div className="post-container">
                 <div className='summary'>
-                    <img src="https://images.unsplash.com/photo-1648590297514-70303e254076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2188&q=80" alt="" />
+                    <img src={PF + post.cover} alt="" />
                     <div className="abstract">
                         <h4>Abstract :</h4>
                         <p>{post.abstract}</p>
                     </div>
                 </div>
-                <p className='content'>{post.content}</p>
+                <p className='content' dangerouslySetInnerHTML={{__html: post.content}}></p>
 
             </div>
         </div>

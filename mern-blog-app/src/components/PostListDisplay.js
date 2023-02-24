@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom'
 
 function PostListDisplay() {
   const [posts, setPosts] = useState([]);
+  const PF  = "http://localhost:3001/"
+
 
   useEffect(() => {
     getPosts();
@@ -28,7 +30,7 @@ function PostListDisplay() {
           <div className='postListCard' key={post._id}>
             <div className="image">
               <Link to={`/posts/${post._id}`}>
-                <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVjaG5vbG9naWV8ZW58MHx8MHx8&auto=format&fit=crop&w=1400&q=60" alt="" />
+                <img src={PF + post.cover} alt="" />
               </Link>
             </div>
             <div className="text">

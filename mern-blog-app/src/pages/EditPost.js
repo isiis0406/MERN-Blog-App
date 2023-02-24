@@ -49,7 +49,7 @@ function EditPost() {
                 button: "Ok",
               });
               
-            //Redirect to home Page
+            //Redirect to detail post Page
             navigate(`/posts/${params.id}`);
        }
         catch (error) {
